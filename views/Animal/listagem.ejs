@@ -1,0 +1,26 @@
+<h1>Animais cadastrados</h1>
+<br><br>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <th>Código</th>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th>Disponível</th>
+        </thead>
+        <tbody>
+            <% for(let i = 0; i<lista.length; i++) { %>
+                <tr>
+                    <td><%= lista[i].animalId %></td>
+                    <td><img width="100" src="<%= lista[i].animalImagem %>" /></td>
+                    <td><%= lista[i].animalNome %></td>
+                    <td><%= lista[i].animalDescricao %></td>
+                    <td><%= lista[i].tipoNome %></td>
+                    <td><%= lista[i].animalDisponivel %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
