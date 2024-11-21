@@ -88,13 +88,38 @@ class AnimalModel {
   async gravar() {
     let sql = `insert into tb_animal (ani_nome, ani_descricao, ani_disponivel, ani_imagem, tip_id) values (?, ?, ?, ?, ?)`
     let valores = [
-      this.#animalNome, 
+      this.#animalNome,
       this.#animalDescricao,
       this.#animalDisponivel,
       this.#animalImagem,
       this.#tipoId,
     ]
     return await conexao.ExecutaComandoNonQuery(sql, valores)
+  }
+
+  async buscar(id) {
+    let sql = `select * from tb_animal a inner join tb_tipoanimal t on a.tip_id = t.tip_id where a.ani_id = ?`
+    let valores = [id]
+    var rows = await conexao.ExecutaComando(sql, valores)
+    let animal = null
+
+    if (rows.length > 0) {
+      var row = rows[0]
+
+      let imagem = "/img/animais/" + row["ani_imagem"]
+
+      animal = new AnimalModel(
+        row["ani_id"],
+        row["ani_nome"],
+        row["ani_descricao"],
+        row["ani_disponivel"],
+        imagem,
+        row["tip_id"],
+        row["tip_nome"],
+      )
+    }
+
+    return animal
   }
 
   async listarTipos() {
@@ -119,7 +144,7 @@ class AnimalModel {
 
   async listar(apenasDisponivel = false) {
     let sqlWhere = ""
-    if (apenasDisponivel) sqlWhere = " where ani_disponivel = 'S' "
+    if (apenasDisponivel) sqlWhere = " where ani_disponivel = '1' "
 
     let sql =
       "select * from tb_animal a inner join tb_tipoanimal t on a.tip_id = t.tip_id" +
@@ -135,11 +160,9 @@ class AnimalModel {
 
         let imagem = ""
         if (row["ani_imagem"].toString("base64")[0] == "i") {
-          imagem =
-            "/img/animais/" + row["ani_imagem"]
+          imagem = "/img/animais/" + row["ani_imagem"]
         } else {
-          imagem =
-            "/img/animais/" + row["ani_imagem"]
+          imagem = "/img/animais/" + row["ani_imagem"]
         }
 
         listaRetorno.push(
