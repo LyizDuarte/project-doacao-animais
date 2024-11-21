@@ -54,7 +54,7 @@ console.log("fui chamado para gravar")
     data.append("nome", inputNome.value)
     data.append("descricao", inputDescricao.value)
     data.append("tipo", selTipo.value)
-    data.append("disponivel", selDisponivel.value)
+    data.append("disponivel", selDisponivel.checked ? 1 : 0)
     data.append("imagem", inputFile)
 
     fetch("/animal/cadastrar", {
