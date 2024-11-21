@@ -88,7 +88,7 @@ class AnimalModel {
   async gravar() {
     let sql = `insert into tb_animal (ani_nome, ani_descricao, ani_disponivel, ani_imagem, tip_id) values (?, ?, ?, ?, ?)`
     let valores = [
-      this.#animalNome,
+      this.#animalNome, 
       this.#animalDescricao,
       this.#animalDisponivel,
       this.#animalImagem,
@@ -136,10 +136,10 @@ class AnimalModel {
         let imagem = ""
         if (row["ani_imagem"].toString("base64")[0] == "i") {
           imagem =
-            "data:image/png;base64, " + row["ani_imagem"].toString("base64")
+            "/img/animais/" + row["ani_imagem"]
         } else {
           imagem =
-            "data:image/jpg;base64, " + row["ani_imagem"].toString("base64")
+            "/img/animais/" + row["ani_imagem"]
         }
 
         listaRetorno.push(
