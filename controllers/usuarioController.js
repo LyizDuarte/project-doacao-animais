@@ -18,7 +18,7 @@ class UsuarioController{
     }
 
     deslogar(req, res) {
-        res.cookies.remove("usuarioLogado")
+        res.clearCookie("usuarioLogado")
 
         res.redirect("/login")
     }
