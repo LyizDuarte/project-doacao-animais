@@ -1,4 +1,7 @@
 <script src="/js/Adocao/listar.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<link media="print" href="/css/print.css" rel="stylesheet"> </link>
+
 <h1>Animais adotados</h1>
 <div class="print">
     <div class="form-group">
@@ -21,7 +24,7 @@
     </div>
 <br><br>
 <div>
-    <table class="table table-striped tabelaPedidos">
+    <table id="tbExcel" class="table table-striped tabelaPedidos">
         <thead>
             <th>Id de Adocao</th>
             <th>Nome do pet</th>

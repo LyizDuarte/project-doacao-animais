@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", exportarExcel)
 
   function exportarExcel() {
-    var wb = XLSX.utils.table_to_book(document.getElementById("tabelaPedidos"))
+    console.log("Fui chamado para exportar por excel")
+    var wb = XLSX.utils.table_to_book(document.getElementById("tbExcel"))
     XLSX.writeFile(wb, "animais-adotados.xlsx")
   }
 

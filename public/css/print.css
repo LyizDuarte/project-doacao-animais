@@ -1,6 +1,6 @@
 
 @media print {
-    #divFiltros, #btnExportarExcel, #btnExportarPdf {
+    .print{
         display: none !important;
     }
 }
