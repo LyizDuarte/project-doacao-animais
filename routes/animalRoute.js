@@ -31,5 +31,6 @@ animalRouter.post(
   auth.verificarUsuarioLogado,
   ctrl.cadastrar
 )
+animalRouter.get("/buscar/:id", auth.verificarUsuarioLogado, ctrl.buscar)
 
 module.exports = animalRouter
