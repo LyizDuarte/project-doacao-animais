@@ -16,9 +16,13 @@
                     <td><%= lista[i].animalId %></td>
                     <td><img width="80" src="<%= lista[i].animalImagem %>" /></td>
                     <td><%= lista[i].animalNome %></td>
-                    <td><%= lista[i].animalDescricao %></td>
+                    <td><%= lista[i].animalDescricao%></td>
                     <td><%= lista[i].tipoNome %></td>
-                    <td><%= lista[i].animalDisponivel %></td>
+                    <%if(lista[i].animalDisponivel == true){ %>
+                        <td>Disponivel</td>
+                     <% }else{%>
+                        <td>Já adotado</td>
+                    <%}%>
                 </tr>
             <% } %>
         </tbody>
