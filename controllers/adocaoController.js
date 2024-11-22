@@ -44,6 +44,15 @@ class AdocaoController {
     let lista = await adotados.listarAdotados()
     res.render("adocao/adotados", { lista: lista })
   }
+
+  async filtrarAdotados(req, res) {
+    let adotados = new AdocaoModel()
+    let lista = await adotados.filtrarAdotados(
+      req.body.termo,
+      req.body.tipoBusca
+    )
+    res.json({ lista: lista })
+  }
 }
 
 module.exports = AdocaoController

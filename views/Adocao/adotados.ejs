@@ -1,7 +1,27 @@
+<script src="/js/Adocao/listar.js"></script>
 <h1>Animais adotados</h1>
+<div class="print">
+    <div class="form-group">
+        <label>Termo de busca: </label>
+        <input type="text" class="form-control" id="inputBusca">
+    </div>
+    <div class="form-group">
+        <label>Escolha o tipo de busca: </label>
+        <label><input value="numero" type="radio" name="tipoBusca"/> Número de adocao </label>
+        <label><input  value="animal" type="radio" name="tipoBusca"/> Nome do animal </label>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i>Buscar</button>
+    </div>
+    
+    <div style="text-align: end; margin-bottom: 10px;">
+        <button class="btn btn-primary" id="btnExportarExcel"><i class="fas fa-file"></i> Exportar para Excel</button>
+        <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-file"></i> Exportar para PDF</button>
+    </div>
+    </div>
 <br><br>
 <div>
-    <table class="table table-striped">
+    <table class="table table-striped tabelaPedidos">
         <thead>
             <th>Id de Adocao</th>
             <th>Nome do pet</th>

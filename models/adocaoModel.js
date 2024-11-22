@@ -148,6 +148,42 @@ class AdocaoModel {
     return lista
   }
 
+  async filtrarAdotados(termo, tipoBusca) {
+    let whereFiltro = ""
+    if (termo) {
+      if (tipoBusca == "numero") {
+        whereFiltro = `where a.ado_id = ${termo}`
+      } else if (tipoBusca == "animal") {
+        whereFiltro = `where an.ani_nome like '%${termo}%'`
+      }
+    }
+    let sql = `select * from tb_adocao a inner join tb_animal an on a.ani_id = an.ani_id ${whereFiltro}`
+    var rows = await conexao.ExecutaComando(sql)
+    let lista = []
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        var row = rows[i]
+        let imagem = "/img/animais/" + row["ani_imagem"]
+        lista.push(
+          new AdocaoModel(
+            row["ado_id"],
+            row["ado_nome"],
+            row["ado_endereco"],
+            row["ado_telefone"],
+            row["ani_id"],
+            row["ani_nome"],
+            row["ani_descricao"],
+            row["ani_disponivel"],
+            imagem,
+            row["tip_id"],
+            row["tip_nome"]
+          )
+        )
+      }
+    }
+    return lista
+  }
+
   toJSON() {
     return {
       adocaoId: this.#adocaoId,
@@ -155,6 +191,12 @@ class AdocaoModel {
       adocaoEndereco: this.#adocaoEndereco,
       adocaoTelefone: this.#adocaoTelefone,
       animalId: this.#animalId,
+      animalNome: this.#animalNome,
+      animalDescricao: this.#animalDescricao,
+      animalDisponivel: this.#animalDisponivel,
+      animalImagem: this.#animalImagem,
+      tipoId: this.#tipoId,
+      tipoNome: this.#tipoNome,
     }
   }
 }

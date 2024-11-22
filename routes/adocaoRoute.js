@@ -8,6 +8,7 @@ let auth = new AuthMiddleware()
 let controller = new AdocaoController()
 router.get("/", controller.listarView)
 router.get("/listar", auth.verificarUsuarioLogado, controller.adotadosView)
+router.post("/listar", auth.verificarUsuarioLogado, controller.filtrarAdotados)
 router.post("/adotar", controller.adotar)
 
 module.exports = router
