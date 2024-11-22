@@ -1,0 +1,34 @@
+<h1>Animais adotados</h1>
+<br><br>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <th>Id de Adocao</th>
+            <th>Nome do pet</th>
+            <th>Imagem</th>
+            <th>Descrição</th>
+            <th>Disponivel</th>
+            <th>Dono</th>
+            <th>Endereco</th>
+            <th>Telefone</th>
+        </thead>
+        <tbody>
+            <% for(let i = 0; i<lista.length; i++) { %>
+                <tr>
+                    <td><%= lista[i].adocaoId %></td>
+                    <td><%= lista[i].animalNome %></td>
+                    <td><img width="80" src="<%= lista[i].animalImagem %>" /></td>
+                    <td><%= lista[i].animalDescricao %></td>
+                    <%if(lista[i].animalDisponivel == false){%>
+                        <td>Adotado</td>
+                    <%}else{%>
+                        <td>Disponível</td>
+                    <%}%>
+                    <td><%= lista[i].adocaoNome %></td>
+                    <td><%= lista[i].adocaoEndereco %></td>
+                    <td><%= lista[i].adocaoTelefone %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
