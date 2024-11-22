@@ -15,7 +15,13 @@ class AdocaoController {
       req.body.nome,
       req.body.endereco,
       req.body.telefone,
-      req.body.idAnimal
+      req.body.idAnimal,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     )
     let result = await adocao.adotar()
     if (result) {
@@ -31,6 +37,12 @@ class AdocaoController {
         msg: "Erro ao adotar animal!",
       })
     }
+  }
+
+  async adotadosView(req, res) {
+    let adotados = new AdocaoModel()
+    let lista = await adotados.listarAdotados()
+    res.render("adocao/adotados", { lista: lista })
   }
 }
 

@@ -8,6 +8,12 @@ class AdocaoModel {
   #adocaoEndereco
   #adocaoTelefone
   #animalId
+  #animalNome
+  #animalDescricao
+  #animalDisponivel
+  #animalImagem
+  #tipoId
+  #tipoNome
 
   get adocaoId() {
     return this.#adocaoId
@@ -39,13 +45,67 @@ class AdocaoModel {
   set animalId(animalId) {
     this.#animalId = animalId
   }
+  get animalNome() {
+    return this.#animalNome
+  }
+  set animalNome(animalNome) {
+    this.#animalNome = animalNome
+  }
+  get animalDescricao() {
+    return this.#animalDescricao
+  }
+  set animalDescricao(animalDescricao) {
+    this.#animalDescricao = animalDescricao
+  }
+  get animalDisponivel() {
+    return this.#animalDisponivel
+  }
+  set animalDisponivel(animalDisponivel) {
+    this.#animalDisponivel = animalDisponivel
+  }
+  get animalImagem() {
+    return this.#animalImagem
+  }
+  set animalImagem(animalImagem) {
+    this.#animalImagem = animalImagem
+  }
+  get tipoId() {
+    return this.#tipoId
+  }
+  set tipoId(tipoId) {
+    this.#tipoId = tipoId
+  }
+  get tipoNome() {
+    return this.#tipoNome
+  }
+  set tipoNome(tipoNome) {
+    this.#tipoNome = tipoNome
+  }
 
-  constructor(adocaoId, adocaoNome, adocaoEndereco, adocaoTelefone, animalId) {
+  constructor(
+    adocaoId,
+    adocaoNome,
+    adocaoEndereco,
+    adocaoTelefone,
+    animalId,
+    animalNome,
+    animalDescricao,
+    animalDisponivel,
+    animalImagem,
+    tipoId,
+    tipoNome
+  ) {
     this.#adocaoId = adocaoId
     this.#adocaoNome = adocaoNome
     this.#adocaoEndereco = adocaoEndereco
     this.#adocaoTelefone = adocaoTelefone
     this.#animalId = animalId
+    this.#animalNome = animalNome
+    this.#animalDescricao = animalDescricao
+    this.#animalDisponivel = animalDisponivel
+    this.#animalImagem = animalImagem
+    this.#tipoId = tipoId
+    this.#tipoNome = tipoNome
   }
 
   async adotar() {
@@ -58,6 +118,34 @@ class AdocaoModel {
     ]
     let result = await conexao.ExecutaComandoNonQuery(sql, valores)
     return result
+  }
+
+  async listarAdotados() {
+    let sql = `select * from tb_adocao a inner join tb_animal an on a.ani_id = an.ani_id`
+    var rows = await conexao.ExecutaComando(sql)
+    let lista = []
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        var row = rows[i]
+        let imagem = "/img/animais/" + row["ani_imagem"]
+        lista.push(
+          new AdocaoModel(
+            row["ado_id"],
+            row["ado_nome"],
+            row["ado_endereco"],
+            row["ado_telefone"],
+            row["ani_id"],
+            row["ani_nome"],
+            row["ani_descricao"],
+            row["ani_disponivel"],
+            imagem,
+            row["tip_id"],
+            row["tip_nome"]
+          )
+        )
+      }
+    }
+    return lista
   }
 
   toJSON() {
