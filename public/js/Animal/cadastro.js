@@ -26,7 +26,6 @@ function exibirPrevia(e) {
 }
 
 function gravarAnimal() {
-console.log("fui chamado para gravar")
   var inputNome = document.getElementById("inputNome")
   var inputDescricao = document.getElementById("inputDescricao")
   var inputFile = document.getElementById("inputImagem").files[0]
