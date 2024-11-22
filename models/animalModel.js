@@ -115,7 +115,7 @@ class AnimalModel {
         row["ani_disponivel"],
         imagem,
         row["tip_id"],
-        row["tip_nome"],
+        row["tip_nome"]
       )
     }
 
@@ -180,6 +180,12 @@ class AnimalModel {
     }
 
     return listaRetorno
+  }
+
+  async colocarComoIndisponivel(id) {
+    let sql = `update tb_animal set ani_disponivel = 0 where ani_id = ?`
+    let valores = [id]
+    return await conexao.ExecutaComandoNonQuery(sql, valores)
   }
 
   toJSON() {

@@ -19,6 +19,8 @@ class AdocaoController {
     )
     let result = await adocao.adotar()
     if (result) {
+      let animal = new AnimalModel()
+      animal.colocarComoIndisponivel(req.body.idAnimal)
       res.send({
         ok: true,
         msg: "Animal adotado com sucesso!",
