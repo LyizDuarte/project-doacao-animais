@@ -35,6 +35,11 @@ class AnimalController {
     }
     res.send({ ok: ok })
   }
+  async buscar(req, res) {
+    let animal = new AnimalModel()
+    animal = await animal.buscar(req.params.id)
+    res.send({ ok: true, animal: animal })
+  }
 }
 
 module.exports = AnimalController
