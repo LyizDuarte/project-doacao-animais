@@ -37,4 +37,9 @@ app.use("/home", homeRoute)
 app.use("/usuarios", usuarioRoute)
 
 //ponto de inicio do nosso servidor web
-module.exports = app
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando localmente na porta ${PORT}`);
+});
+
