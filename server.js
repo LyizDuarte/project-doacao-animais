@@ -37,6 +37,4 @@ app.use("/home", homeRoute)
 app.use("/usuarios", usuarioRoute)
 
 //ponto de inicio do nosso servidor web
-const server = app.listen("5001", function () {
-  console.log("Servidor web iniciado")
-})
+module.exports = app
