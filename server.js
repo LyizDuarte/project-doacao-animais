@@ -31,6 +31,7 @@ app.use("/", adocaoRoute)
 let auth = new AuthMiddleware()
 
 app.use(auth.verificarUsuarioLogado)
+app.use(auth.verificarAdmin)
 
 app.use("/animal", animalRoute)
 app.use("/home", homeRoute)

@@ -16,6 +16,27 @@ class AuthMiddleware {
       res.redirect("/login")
     }
   }
+
+  async verificarAdmin(req, res, next) {
+    if (req.cookies != undefined && req.cookies.usuarioLogado != null) {
+      let usuarioId = req.cookies.usuarioLogado
+      let usuario = new UsuarioModel()
+      usuario = await usuario.obter(usuarioId)
+      if (
+        usuario != null &&
+        usuario.usuarioAtivo == 1 &&
+        usuario.perfilId == 1
+      ) {
+        //o locals na resposta vai injetar a variavel usuarioLogado em todas as páginas que dependem do middleware para liberar o acesso
+        res.locals.usuarioLogado = usuario
+        next()
+      } else {
+        res.redirect("/?erro=nao_admin")
+      }
+    } else {
+      res.redirect("/")
+    }
+  }
 }
 
 module.exports = AuthMiddleware
